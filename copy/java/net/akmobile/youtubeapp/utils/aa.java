@@ -1,47 +1,45 @@
 package net.akmobile.youtubeapp.utils;
-import androf.graphics.Bitmap;
-import androf.graphics.BitmapFactory;
-import androf.graphics.Canvas;
-import androf.graphics.Paint;
-import androf.graphics.PorterDuff;
-import androf.graphics.PorterDuffXfermode;
-import androf.graphics.Rect;
-import androf.media.MediaMetadataRetriever;
-import androf.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.media.MediaMetadataRetriever;
+import android.util.Log;
 import java.io.File;
+/** * Created with Android Studio. * User: ryan.hoo.j@gmail.com * Date: 9/14/16 * Time: 8:42 PM * Desc: BitmapUtils * TODO To be optimized */
 public class aa {
- private static final String a="AlbumUtils";
- public Bitmap parseAlbum(File a) {
- MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
- try {
- metadataRetriever.setDataSource(a.getAbsolutePath());
- }
- catch (IllegalArgumentException e) {
- Log.e(a, "parseAlbum: ", e);
- }
- byte[] albumData = metadataRetriever.getEmbeddedPicture();
- if (albumData != i) {
- final Bitmap result = BitmapFactory.decodeByteArray(albumData, 0, albumData.length);
- albumData=i;
- return result;
- }
- return i;
- }
- public static Bitmap getCroppedBitmap(Bitmap bitmap) {
- Bitmap output = Bitmap.createBitmap(bitmap.getWfth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
- Canvas canvas = new Canvas(output);
- final int color = 0xff424242;
- final Paint c= new Paint();
- final Rect rect = new Rect(0, 0, bitmap.getWfth(), bitmap.getHeight());
- c.setAntiAlias(true);
- canvas.drawARGB(0, 0, 0, 0);
- c.setColor(color);
- // canvas.drawRoundRect(rectF, roundPx, roundPx, c);
- canvas.drawCircle(bitmap.getWfth() / 2, bitmap.getHeight() / 2, bitmap.getWfth() / 2, c);
- c.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
- canvas.drawBitmap(bitmap, rect, rect, c);
- //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
- //return _bmp;
- return output;
- }
+private static final String a= "AlbumUtils";
+public Bitmap parseAlbum(File file) {
+MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
+try {
+metadataRetriever.setDataSource(file.getAbsolutePath());
+}
+catch (IllegalArgumentException e) {
+Log.e(a, "parseAlbum: ", e);
+}
+byte[] albumData = metadataRetriever.getEmbeddedPicture();
+if (albumData != null) {
+final Bitmap result = BitmapFactory.decodeByteArray(albumData, 0, albumData.length);
+albumData=null;
+return result;
+}
+return null;
+}
+public static Bitmap getCroppedBitmap(Bitmap bitmap) {
+Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+Canvas canvas = new Canvas(output);
+final int color = 0xff424242;
+final Paint paint = new Paint();
+final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+paint.setAntiAlias(true);
+canvas.drawARGB(0, 0, 0, 0);
+paint.setColor(color);
+canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
+paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+canvas.drawBitmap(bitmap, rect, rect, paint);
+return output;
+}
 }

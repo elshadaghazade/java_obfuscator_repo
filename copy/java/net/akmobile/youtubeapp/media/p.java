@@ -1,12 +1,14 @@
 package net.akmobile.youtubeapp.media;
-import androf.content.Conu;
-import androf.util.AttributeSet;
-import androf.wfget.MediaController;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.MediaController;
+/** * Created by Rahimli Rahim on 06/10/2016. * ragim95@gmail.com * https: */
 public class p extends MediaController {
- public MusicController(Conuc) {
- super(c);
- }
- public vofhfe() {
- super.hfe();
- }
+public p(Context context) {
+super(context);
+}
+@Override
+public void hide() {
+super.hide();
+}
 }

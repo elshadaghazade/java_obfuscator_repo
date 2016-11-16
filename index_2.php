@@ -6,8 +6,9 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
-//chdir("/Users/elshad/Desktop/java_obfuscator/YoutubeDownloader-master/app/src/main");
-chdir("/var/www/bms.local/site_v1.0/java_obfuscator/java_obfuscator/YoutubeDownloader-master/app/src/main");
+chdir("/Users/elshad/Downloads/java_obfuscator/java_obfuscator/YoutubeDownloader-master/app/src/main");
+
+//chdir("/var/www/bms.local/site_v1.0/java_obfuscator/java_obfuscator/YoutubeDownloader-master/app/src/main");
 
 class Obfuscator {
 
@@ -159,6 +160,9 @@ class Obfuscator {
 
     // compiler
     private function compile($line, &$details, $classFile, $className) {
+        if($line == "@Override") {
+            return;
+        }
         static $scope = 0;
         static $previousClass = null;
 
@@ -211,24 +215,32 @@ class Obfuscator {
         );
 
         $content = file_get_contents($classFile);
-        $content = preg_replace("/\@[^\n\r]+/", "", $content); // @override lari siliriy
+        
+        //$content = preg_replace("/\@[^\n\r]+/", "", $content); // @override lari siliriy\
+        $content = preg_replace("/\/\/[^\n\r]*/", "", $content);
         $content = preg_replace("/[\n\r]+/", "", $content); // break-leri yigisdiririg
-        $content = $this->clearMultilineComments($content); // multiline kommentleri siliriy
+        //$content = $this->clearMultilineComments($content); // multiline kommentleri siliriy
         $content = preg_replace("/([\n\r\t\s])+/", "\\1", $content); // uzun uzadi breakleri tablari spaceleri siliriy
         $content = preg_replace("/\}/", "}\n", $content);
         $content = preg_replace("/\{/", "{\n", $content);
         $content = preg_replace("/\;/", ";\n", $content);
+        $content = preg_replace("/\*\//", "*/\n", $content); // multiline kommentlerden sonra break qoyuruq
+        $content = preg_replace("/@Override/", "@Override\n", $content); // @override-lardan sonra break qoyuruq
+        //$content = preg_replace("/\/\*[^\n\r]*/", "", $content);
         $details['content'] = $content;
+        
+        //echo $content;
 
         $splittedContent = preg_split("/[\n\r]/", $content);
 
-        // tek setirli kommentleri temizleyirik
+        
         foreach ($splittedContent as $key => $line) {
-            if (preg_match("/^\/{2}/", trim($line))) {
+            // kommentleri temizleyirik
+            if (preg_match("/^(\/{2}|\/\*)/", trim($line))) {
                 unset($splittedContent[$key]);
                 continue;
             }
-
+            
             $this->compile(trim($line), $details, $classFile, $className);
         }
 
@@ -237,6 +249,9 @@ class Obfuscator {
 
     public function obfuscateInYourself() {
         foreach ($this->classes as $cKey => $row) {
+            if ($row['class_detailes']['type'] != 'class') {
+                continue;
+            }
             // birinci ozunde deyisiriy
             $content = $row['class_detailes']['content'];
 
@@ -275,7 +290,7 @@ class Obfuscator {
                 $content = preg_replace($pattern, $replace, $content);
 
                 foreach ($property->name as $pKey => $name) {
-                    $content = preg_replace("/([\n\r\s\t=\(\)]+)({$row['class_detailes']['class_name_obfuscated']}\.)?{$name}[\s]*/", "\\1\\2{$property->name_obfuscated[$pKey]}", $content);
+                    $content = preg_replace("/([\n\r\s\t=\(\),]+)({$row['class_detailes']['class_name_obfuscated']}\.)?{$name}[\s]*/", "\\1\\2{$property->name_obfuscated[$pKey]}", $content);
                 }
             }
 
@@ -286,8 +301,14 @@ class Obfuscator {
     function obfuscateInOthers() {
         $objects = [];
         foreach ($this->classes as $cKey => $row) {
+            if ($row['class_detailes']['type'] != 'class') {
+                continue;
+            }
             $class1 = $row['class_detailes'];
             foreach ($this->classes as $eKey => $eRow) {
+                if ($eRow['class_detailes']['type'] != 'class') {
+                    continue;
+                }
                 $class2 = $eRow['class_detailes'];
 
                 // oz faylini ignore edirik
@@ -460,6 +481,8 @@ class Obfuscator {
         $this->obfuscateInYourself();
         $this->obfuscateInOthers();
 
+        $this->saveFiles();
+
         echo "<pre>";
         print_r($this->classes);
     }
@@ -468,6 +491,9 @@ class Obfuscator {
     public function saveFiles() {
         chdir("../../../../copy");
         foreach ($this->classes as $key => $row) {
+            if ($row['class_detailes']['type'] != "class") {
+                continue;
+            }
             $fp = fopen($row['path'] . "/" . $row['class_detailes']['class_name_obfuscated'] . ".java", "w");
             fwrite($fp, $row['class_detailes']['content_obfuscated']);
             fclose($fp);

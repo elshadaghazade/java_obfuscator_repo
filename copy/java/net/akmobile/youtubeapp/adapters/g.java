@@ -1,67 +1,72 @@
-package net.akmobile.youtubeapp.bs;
-import androf.app.DownloadManager;
-import androf.content.Conu;
-import androf.net.Uri;
-import androf.os.Environment;
-import androf.support.v7.wfget.RecyclerView;
-import androf.util.Log;
-import androf.i.LayoutInflater;
-import androf.i.View;
-import androf.i.ViewGroup;
-import androf.wfget.ImageView;
-import androf.wfget.TextView;
+package net.akmobile.youtubeapp.adapters;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import net.akmobile.youtubeapp.R;
-import net.akmobile.youtubeapp.activities.c;
-import net.akmobile.youtubeapp.interfaces.m;
-import net.akmobile.youtubeapp.models.s;
-import net.akmobile.youtubeapp.utils.ad;
-import net.akmobile.youtubeapp.utils.ae;
+import net.akmobile.youtubeapp.activities.MainActivity;
+import net.akmobile.youtubeapp.interfaces.OnListItemsClickListener;
+import net.akmobile.youtubeapp.models.SearchedItem;
+import net.akmobile.youtubeapp.utils.DonutProgress;
+import net.akmobile.youtubeapp.utils.FileManager;
 import java.util.ArrayList;
+/** * Created by Rahimli Rahim on 29/09/2016. * ragim95@gmail.com * https: */
 public class g extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {
- private ArrayList<s> a;
- private m b;
- public SearchResultsAdapter(ArrayList<s> a) {
- this.a= a;
- }
- public ViewHolder onCreateViewHolder(ViewGroup parent, int iType) {
- View i= LayoutInflater.from(parent.getConu()) .inflate(R.layout.item_search_result, parent, false);
- return new g.ViewHolder(i);
- }
- public vofsetDownloading(int g,boolean a){
- a.set(g,a.get(g).setDownloading(a));
- }
- public vofonBindViewHolder(final ViewHolder holder, final int g) {
- final s vfeo = a.get(g);
- holder.b.setText(vfeo.getTitle());
- if(vfeo.a()) holder.k.setVisibility(View.VISIBLE);
- else holder.k.setVisibility(View.GONE);
- holder.download.setOnClickListener(new View.OnClickListener() {
- public vofonClick(View v) {
- b.onDownloadClick(vfeo,holder.k,g);
- }
- }
+private ArrayList<SearchedItem> a;
+private OnListItemsClickListener b;
+public g(ArrayList<SearchedItem> a) {
+this.videos = a;
+}
+@Override
+public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+View view = LayoutInflater.from(parent.getContext()) .inflate(R.layout.item_search_result, parent, false);
+return new g.ViewHolder(view);
+}
+public void setDownloading(int position,boolean isDownloading){
+a.set(position,a.get(position).setDownloading(isDownloading));
+}
+@Override
+public void onBindViewHolder(final ViewHolder holder, final int position) {
+final SearchedItem video = a.get(position);
+holder.title.setText(video.getTitle());
+if(video.isDownloading()) holder.progress.setVisibility(View.VISIBLE);
+else holder.progress.setVisibility(View.GONE);
+holder.download.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+b.onDownloadClick(video,holder.progress,position);
+}
+}
 );
- Picasso.with(holder.c).load(vfeo.getThumbURL()).into(holder.thumbnail);
- }
- public int getItemCount() {
- return a.size();
- }
- public vofsetListener(m b) {
- this.b= b;
- }
- class ViewHolder extends RecyclerView.ViewHolder {
- private ImageView thumbnail, download;
- private TextView b;
- private Conuc;
- private ad k;
- ViewHolder(View itemView) {
- super(itemView);
- c= itemView.getConu();
- thumbnail = (ImageView) itemView.findViewById(R.f.imagei_vfeo_thumb);
- b= (TextView) itemView.findViewById(R.f.ui_vfeo_b);
- download = (ImageView) itemView.findViewById(R.f.imagei_download_music_icon);
- k= (ad) itemView.findViewById(R.f.donut_download_k);
- }
- }
+Picasso.with(holder.context).load(video.getThumbURL()).into(holder.thumbnail);
+}
+@Override
+public int getItemCount() {
+return a.size();
+}
+public void setListener(OnListItemsClickListener b) {
+this.listener = b;
+}
+class ViewHolder extends RecyclerView.ViewHolder {
+private ImageView thumbnail, download;
+private TextView title;
+private Context context;
+private DonutProgress progress;
+ViewHolder(View itemView) {
+super(itemView);
+context = itemView.getContext();
+thumbnail = (ImageView) itemView.findViewById(R.id.imageview_video_thumb);
+title = (TextView) itemView.findViewById(R.id.textview_video_title);
+download = (ImageView) itemView.findViewById(R.id.imageview_download_music_icon);
+progress = (DonutProgress) itemView.findViewById(R.id.donut_download_progress);
+}
+}
 }

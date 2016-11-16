@@ -1,132 +1,149 @@
 package net.akmobile.youtubeapp.fragments;
-import androf.content.BroadcastReceiver;
-import androf.content.Conu;
-import androf.content.Intent;
-import androf.content.IntentFilter;
-import androf.os.Bundle;
-import androf.os.Environment;
-import androf.support.annotation.Nullable;
-import androf.support.v4.app.Fragment;
-import androf.support.v7.wfget.LinearLayoutManager;
-import androf.support.v7.wfget.RecyclerView;
-import androf.util.Log;
-import androf.i.LayoutInflater;
-import androf.i.View;
-import androf.i.ViewGroup;
-import androf.i.animation.TranslateAnimation;
-import androf.wfget.ImageView;
-import androf.wfget.TextView;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 import net.akmobile.youtubeapp.R;
-import net.akmobile.youtubeapp.activities.c;
-import net.akmobile.youtubeapp.bs.e;
-import net.akmobile.youtubeapp.interfaces.m;
-import net.akmobile.youtubeapp.models.q;
-import net.akmobile.youtubeapp.utils.ae;
+import net.akmobile.youtubeapp.activities.MainActivity;
+import net.akmobile.youtubeapp.adapters.DownloadsAdapter;
+import net.akmobile.youtubeapp.interfaces.OnListItemsClickListener;
+import net.akmobile.youtubeapp.models.DownloadedFile;
+import net.akmobile.youtubeapp.utils.FileManager;
 import java.util.ArrayList;
-import belka.us.androftoggleswitch.wfgets.BaseToggleSwitch;
-import belka.us.androftoggleswitch.wfgets.ToggleSwitch;
+import belka.us.androidtoggleswitch.widgets.BaseToggleSwitch;
+import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
+/** * A brepresenting a list of Items. * <p/> * Activities containing this bMUST implement the {
+@link OnListItemsClickListener}
+* interface. */
 public class k extends Fragment {
- private m a;
- private e b;
- private ArrayList<q> c;
- private DownloadsFragment.DownloadsReceiver d;
- private RecyclerView e;
- private TextView f;
- private ToggleSwitch g;
- private IntentFilter h;
- public DownloadsFragment() {
- }
- public static k newInstance() {
- k fragment = new k();
- Bundle args = new Bundle();
- fragment.setArguments(args);
- return fragment;
- }
- public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
- View i= inflater.inflate(R.layout.fragment_downloads, container, false);
- ae aManager = new ae();
- c= aManager.getqs(Environment.getExternalStoragePublicDirectory(ae.b));
- // Set the bif (c.isEmpty()) {
- f= (TextView) i.findViewById(R.f.ui_no_downloads);
- f.setVisibility(View.VISIBLE);
- }
- g= (ToggleSwitch) i.findViewById(R.f.toggle_music_vfeo);
- g.setOnToggleSwitchChangeListener(new BaseToggleSwitch.OnToggleSwitchChangeListener() {
- public vofonToggleSwitchChangeListener(int g, boolean isChecked) {
- updateRecycler(g== 0 ? ae.b: ae.a);
- a.onMediaTypeSwitch();
- }
- }
+private OnListItemsClickListener mListener;
+private DownloadsAdapter adapter;
+private ArrayList<DownloadedFile> files;
+private DownloadsFragment.DownloadsReceiver receiver;
+private RecyclerView recyclerView;
+private TextView noDownloads;
+private ToggleSwitch musicVideoSwitch;
+private IntentFilter filter;
+/** * Mandatory empty constructor for the bmanager to instantiate the * b(e.g. upon screen orientation changes). */
+public k() {
+}
+public static k newInstance() {
+k b= new k();
+Bundle args = new Bundle();
+b.setArguments(args);
+return b;
+}
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+View c= inflater.inflate(R.layout.fragment_downloads, container, false);
+FileManager fileManager = new FileManager();
+files = fileManager.getDownloadedFiles(Environment.getExternalStoragePublicDirectory(FileManager.MUSIC_FOLDER));
+if (files.isEmpty()) {
+noDownloads = (TextView) c.findViewById(R.id.textview_no_downloads);
+noDownloads.setVisibility(View.VISIBLE);
+}
+musicVideoSwitch = (ToggleSwitch) c.findViewById(R.id.toggle_music_video);
+musicVideoSwitch.setOnToggleSwitchChangeListener(new BaseToggleSwitch.OnToggleSwitchChangeListener() {
+@Override
+public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+updateRecycler(position == 0 ? FileManager.MUSIC_FOLDER : FileManager.VIDEOS_FOLDER);
+mListener.onMediaTypeSwitch();
+}
+}
 );
- e= (RecyclerView) i.findViewById(R.f.recycler_downloads);
- b= new e(c, getActivity());
- e.setLayoutManager(new LinearLayoutManager(i.getConu()));
- b.setListener((c) getActivity());
- e.setAdapter(b); return i;
- }
- public vofonActivityCreated( super.onActivityCreated(savedInstanceState);
- updateRecycler(ae.b);
- }
- private vofupdateRecycler(String folder) {
- slfeToLeft(e);
- ae aManager = new ae();
- c= aManager.getqs(Environment.getExternalStoragePublicDirectory(folder));
- if (!c.isEmpty() && f!= i) f.setVisibility(View.INVISIBLE);
- else if(c.isEmpty()) {
- f= (TextView) getActivity().findViewById(R.f.ui_no_downloads);
- f.setVisibility(View.VISIBLE);
- }
- b= new e(c, getActivity());
- b.setListener((c) getActivity());
- e.setAdapter(b);
- slfeToRight(e);
- }
- public vofonAttach(Conuc) {
- super.onAttach(c);
- if (cinstanceof m) {
- a= (m) c;
- }
- else {
- throw new RuntimeException(c.toString() + " must implement m");
- }
- }
- public vofonDetach() {
- super.onDetach();
- a= i;
- }
- public vofonCreate( super.onCreate(savedInstanceState);
- d= new DownloadsReceiver();
- h= new IntentFilter("UpdateDownloadsFragment");
- getActivity().registerReceiver(d, h);
- //getActivity().unregisterReceiver(d);
- }
- public vofonResume() {
- d= new DownloadsReceiver();
- h= new IntentFilter("UpdateDownloadsFragment");
- getActivity().registerReceiver(d, h);
- super.onResume();
- }
- public vofonPause() {
- getActivity().unregisterReceiver(d);
- super.onPause();
- }
- public vofslfeToRight(View i) {
- TranslateAnimation animate = new TranslateAnimation(-i.getWfth() * 2, 0, 0, 0);
- animate.setDuration(500);
- animate.setFillAfter(true);
- i.startAnimation(animate);
- i.setVisibility(View.VISIBLE);
- }
- // To animate islfe out from right to left public vofslfeToLeft(View i) {
- TranslateAnimation animate = new TranslateAnimation(0, -i.getWfth() * 2, 0, 0);
- animate.setDuration(500);
- animate.setFillAfter(true);
- i.startAnimation(animate);
- i.setVisibility(View.GONE);
- }
- public class DownloadsReceiver extends BroadcastReceiver {
- public vofonReceive(Conuc, Intent intent) {
- updateRecycler(intent.getStringExtra("folder"));
- }
- }
+recyclerView = (RecyclerView) c.findViewById(R.id.recycler_downloads);
+adapter = new DownloadsAdapter(files, getActivity());
+recyclerView.setLayoutManager(new LinearLayoutManager(c.getContext()));
+adapter.setListener((MainActivity) getActivity());
+recyclerView.setAdapter(adapter);
+return c;
+}
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+super.onActivityCreated(savedInstanceState);
+updateRecycler(FileManager.MUSIC_FOLDER);
+}
+/** * This method is invoked when the user has downloaded the file from server * so we need to update the ui, since the data in the folder has changed */
+private void e(String folder) {
+slideToLeft(recyclerView);
+FileManager fileManager = new FileManager();
+files = fileManager.getDownloadedFiles(Environment.getExternalStoragePublicDirectory(folder));
+if (!files.isEmpty() && noDownloads != null) noDownloads.setVisibility(View.INVISIBLE);
+else if(files.isEmpty()) {
+noDownloads = (TextView) getActivity().findViewById(R.id.textview_no_downloads);
+noDownloads.setVisibility(View.VISIBLE);
+}
+adapter = new DownloadsAdapter(files, getActivity());
+adapter.setListener((MainActivity) getActivity());
+recyclerView.setAdapter(adapter);
+slideToRight(recyclerView);
+}
+@Override
+public void onAttach(Context context) {
+super.onAttach(context);
+if (context instanceof OnListItemsClickListener) {
+mListener = (OnListItemsClickListener) context;
+}
+else {
+throw new RuntimeException(context.toString() + " must implement OnListItemsClickListener");
+}
+}
+@Override
+public void onDetach() {
+super.onDetach();
+mListener = null;
+}
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+receiver = new DownloadsReceiver();
+filter = new IntentFilter("UpdateDownloadsFragment");
+getActivity().registerReceiver(receiver, filter);
+}
+@Override
+public void onResume() {
+receiver = new DownloadsReceiver();
+filter = new IntentFilter("UpdateDownloadsFragment");
+getActivity().registerReceiver(receiver, filter);
+super.onResume();
+}
+@Override
+public void onPause() {
+getActivity().unregisterReceiver(receiver);
+super.onPause();
+}
+public void k(View c) {
+TranslateAnimation animate = new TranslateAnimation(-view.getWidth() * 2, 0, 0, 0);
+animate.setDuration(500);
+animate.setFillAfter(true);
+c.startAnimation(animate);
+c.setVisibility(View.VISIBLE);
+}
+public void l(View c) {
+TranslateAnimation animate = new TranslateAnimation(0, -view.getWidth() * 2, 0, 0);
+animate.setDuration(500);
+animate.setFillAfter(true);
+c.startAnimation(animate);
+c.setVisibility(View.GONE);
+}
+/** * This receiver is listening to the broadcast, * which is sent whenever user completes the download in main activity * we should update the recycler, since files in folder changed */
+public class DownloadsReceiver extends BroadcastReceiver {
+@Override
+public void onReceive(Context context, Intent intent) {
+updateRecycler(intent.getStringExtra("folder"));
+}
+}
 }

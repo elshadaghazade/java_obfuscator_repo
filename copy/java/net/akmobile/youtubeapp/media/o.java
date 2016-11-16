@@ -1,46 +1,58 @@
 package net.akmobile.youtubeapp.media;
-import androf.wfget.MediaController;
-import net.akmobile.youtubeapp.services.z;
+import android.widget.MediaController;
+import net.akmobile.youtubeapp.services.MusicService;
+/** * Created by Rahimli Rahim on 06/10/2016. * ragim95@gmail.com * https: */
 public class o implements MediaController.MediaPlayerControl {
- private z a;
- private boolean b;
- public MediaPlayerController(z service, boolean b){
- this.a= service;
- this.b= b;
- }
- public vofstart() {
- a.go();
- }
- public vofpause() {
- a.pausePlayer();
- }
- public int getDuration() {
- if(a!=i&& b&& a.boolean c()) return a.int a();
- return 0;
- }
- public int getCurrentPosition() {
- if(a!=i&& b&& a.boolean c()) return a.getPosition();
- return 0;
- }
- public vofseekTo(int pos) {
- a.seek(pos);
- }
- public boolean isPlaying() {
- return a!= i&& b&& a.boolean c();
- }
- public int getBufferPercentage() {
- return 0;
- }
- public boolean canPause() {
- return true;
- }
- public boolean canSeekBackward() {
- return true;
- }
- public boolean canSeekForward() {
- return true;
- }
- public int getAudioSessionId() {
- return 0;
- }
+private MusicService a;
+private boolean b;
+public o(MusicService service, boolean b){
+this.musicService= service;
+this.musicBound = b;
+}
+@Override
+public void start() {
+a.go();
+}
+@Override
+public void pause() {
+a.pausePlayer();
+}
+@Override
+public int getDuration() {
+if(a!=null && b&& a.isPlaying()) return a.getDuration();
+return 0;
+}
+@Override
+public int getCurrentPosition() {
+if(a!=null && b&& a.isPlaying()) return a.getPosition();
+return 0;
+}
+@Override
+public void seekTo(int pos) {
+a.seek(pos);
+}
+@Override
+public boolean isPlaying() {
+return a!= null && b&& a.isPlaying();
+}
+@Override
+public int getBufferPercentage() {
+return 0;
+}
+@Override
+public boolean canPause() {
+return true;
+}
+@Override
+public boolean canSeekBackward() {
+return true;
+}
+@Override
+public boolean canSeekForward() {
+return true;
+}
+@Override
+public int getAudioSessionId() {
+return 0;
+}
 }
