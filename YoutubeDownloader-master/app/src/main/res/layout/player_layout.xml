@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/player_layout"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/player_gradient"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:visibility="invisible">
+
+    <ImageView
+        android:id="@+id/image_view_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_music_file" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/player_layout_control"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:id="@+id/image_view_previous"
+                style="@style/PlayerIcon"
+                app:srcCompat="@drawable/ic_skip_previous_black_48dp" />
+
+            <ImageView
+                android:id="@+id/image_view_play_pause"
+                style="@style/PlayerIcon"
+                app:srcCompat="@drawable/btn_play" />
+
+            <ImageView
+                android:id="@+id/image_view_next"
+                style="@style/PlayerIcon"
+                app:srcCompat="@drawable/ic_skip_next_black_48dp" />
+
+            <ImageView
+                android:id="@+id/imageview_shuffle"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:tint="@color/shuffle_repeat_selector"
+                app:srcCompat="@drawable/ic_shuffle_36dp" />
+            <ImageView
+                android:id="@+id/imageview_repeat"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:tint="@color/shuffle_repeat_selector"
+                app:srcCompat="@drawable/ic_replay_36dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/texview_song_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+
+             />
+            <TextView
+                android:id="@+id/music_progress_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:textSize="11sp"
+                android:text="0:00/0:01"/>
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/music_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    tools:context="net.akmobile.youtubeapp.activities.MainActivity">
+
+    <TextView
+        android:id="@+id/textview_no_downloads"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:text="@string/no_downloads"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/downloads_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:paddingTop="1dp"
+        android:paddingBottom="5dp">
+
+        <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+            android:id="@+id/toggle_music_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/toggle_background"
+            android:padding="1dp"
+            app:activeBgColor="@color/colorPrimary"
+            app:activeTextColor="@android:color/white"
+            app:cornerRadius="20dp"
+            app:inactiveBgColor="@color/colorAccent"
+            app:inactiveTextColor="@color/colorPrimary"
+            app:textToggleLeft="@string/music"
+            app:textToggleRight="@string/videos"
+            app:toggleWidth="90dp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_downloads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/downloads_control"
+        android:clipToPadding="false"
+        android:paddingBottom="75dp"
+        android:scrollbars="vertical" />
+
+</RelativeLayout>

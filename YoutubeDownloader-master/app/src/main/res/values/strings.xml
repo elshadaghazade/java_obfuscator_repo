@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">YoutubeApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_label">Label</string>
+    <string name="search_hint">Search..</string>
+    <string name="search_title">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="network_not_enabled">Network is not enabled</string>
+    <string name="open_network_settings">3G</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="no_downloads">Your downloads will appear here</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="settings">Settings</string>
+    <string name="contact_us">Contact us</string>
+    <string name="website">www.mp3.com</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_title_select_language">Select language</string>
+
+    <string-array name="pref_languages_list">
+        <item>Russian</item>
+        <item>English</item>
+        <item>Azerbaijani</item>
+    </string-array>
+
+    <string name="input_name">Enter your name</string>
+    <string name="input_email">Enter your email</string>
+    <string name="input_message">Your message...</string>
+    <string name="submit">Submit</string>
+    <string name="select_format">Select format</string>
+    <string name="save_as">Save as:</string>
+    <string name="music_mp3">mp3 music</string>
+    <string name="server_error">Server error occurred while downloading, try again later</string>
+    <string name="converting_the_mp3">We are converting the mp3</string>
+    <string name="please_wait">Please wait</string>
+    <string name="starting_download">Starting download</string>
+    <string name="remove">Remove</string>
+    <string name="share">Share</string>
+    <string name="downloading">Downloading</string>
+    <string name="download_notification_title">YoutubeApp downloading</string>
+    <string name="error_blocked">Error occurred, maybe you are trying to download blocked video</string>
+    <string name="cursor_error">Download manager cursor error</string>
+    <string name="parsing_error">Parsing error</string>
+    <string name="too_big_file_error">Server error while connecting to music converter. Possible reason too big file</string>
+    <string name="already_downloaded">You already downloaded</string>
+    <string name="overwrite">Would you like to overwrite it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="error_connecting_to_server">Error connecting to our servers</string>
+    <string name="error_connecting_to_youtube">Error connecting to youtube</string>
+    <string name="error_deleting_file">Error deleting file</string>
+    <string name="delete_checkup">Are you sure you want to delete this file?</string>
+    <string name="download_successful">Download successful</string>
+    <string name="music">Music</string>
+    <string name="videos">Videos</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_example_list_values">
+        <item>ru</item>
+        <item>en</item>
+        <item>az</item>
+    </string-array>
+
+    <string-array name="tabs">
+        <item>Search</item>
+        <item>Downloads</item>
+    </string-array>
+
+</resources>

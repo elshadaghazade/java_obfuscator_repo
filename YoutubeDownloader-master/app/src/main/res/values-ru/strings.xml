@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YoutubeApp</string>
+    <string name="action_settings">Настройки</string>
+    <string name="app_label">Поле</string>
+    <string name="search_hint">Поиск..</string>
+    <string name="search_title">Поиск</string>
+    <string name="cancel">Отменить</string>
+    <string name="network_not_enabled">Вы не подключены к сети</string>
+    <string name="open_network_settings">3G</string>
+    <string name="no_downloads">Ваши загрузки появятся здесь</string>
+    <string name="starting_download">Начало загрузки</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="settings">Настройки</string>
+    <string name="contact_us">Свяжитесь с нами</string>
+    <string name="website">www.mp3.com</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="pref_title_select_language">Выбрать язык</string>
+
+    <string-array name="pref_languages_list">
+        <item>Русский</item>
+        <item>Английский</item>
+        <item>Азербайджанский</item>
+    </string-array>
+
+    <string name="input_name">Введите ваше имя</string>
+    <string name="input_email">Введите ваш email</string>
+    <string name="input_message">Текст сообщения...</string>
+    <string name="submit">Подтвердить</string>
+    <string name="please_wait">Пожалуйста, подождите</string>
+    <string name="remove">Удалить</string>
+    <string name="downloading">Загружается</string>
+    <string name="download_notification_title">YoutubeApp загружает</string>
+    <string name="error_blocked">Произошла ошибка, возможно вы пытаетесь загрузить заблокированное видео</string>
+    <string name="cursor_error">Ошибка менеджера загрузок</string>
+    <string name="parsing_error">Ошибка при парсинге. Свяжитесь с нами, пожалуйста</string>
+    <string name="too_big_file_error">Ошибка сервера. Возможно размер файла слишком велик</string>
+    <string name="already_downloaded">Вы уже загрузили</string>
+    <string name="overwrite">Хотите перезаписать его?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="error_connecting_to_server">Ошибка при подключении к нашим серверам</string>
+    <string name="error_connecting_to_youtube">Ошибка при подключении к youtube</string>
+    <string name="error_deleting_file">Ошибка при удалении файла</string>
+    <string name="delete_checkup">Вы уверены что хотите удалить файл?</string>
+    <string name="download_successful">Файл успешно загружен!</string>
+    <string name="music">Музыка</string>
+    <string name="videos">Видео</string>
+</resources>

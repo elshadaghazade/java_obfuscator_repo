@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "139828328063",
+    "firebase_url": "https://youtubedownloader-bf9d3.firebaseio.com",
+    "project_id": "youtubedownloader-bf9d3",
+    "storage_bucket": "youtubedownloader-bf9d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139828328063:android:cef090fd7cd8e1da",
+        "android_client_info": {
+          "package_name": "net.akmobile.youtubeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139828328063-v51d0e2du16asqm6oo909ckfdunq6m3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4pKwQ5V_Ftn1EIy3yDjTSJEsM7sUhOtI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

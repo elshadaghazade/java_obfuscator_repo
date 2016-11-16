@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_search"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_marginBottom="4dp"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ripple_effect"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageview_video_thumb"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="5dp" />
+
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/imageview_video_thumb"
+            android:layout_toRightOf="@+id/imageview_video_thumb"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textview_video_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="7"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Video title"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imageview_download_music_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:tint="@color/colorPrimaryDark"
+                app:srcCompat="@drawable/ic_download" />
+
+        </LinearLayout>
+
+        <net.akmobile.youtubeapp.utils.DonutProgress
+            android:id="@+id/donut_download_progress"
+            android:layout_width="50dp"
+            android:clickable="true"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_height="50dp"
+            custom:donut_progress="0"
+            app:donut_background_color="@color/colorAccent"
+            custom:donut_text_size="12sp"
+            custom:donut_text_color="@color/colorPrimary"
+            custom:donut_unfinished_stroke_width="2dp"
+            custom:donut_finished_stroke_width="4dp"
+            custom:donut_max="100"
+            custom:donut_finished_color="@color/colorPrimary"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

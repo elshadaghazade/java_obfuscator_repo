@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    tools:context="net.akmobile.youtubeapp.activities.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_search_videos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="75dp"
+        android:scrollbars="vertical"
+        />
+
+    <ProgressBar
+        android:id="@+id/search_progress_bar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        />
+
+    <ImageView
+        android:id="@+id/search_icon_large"
+        android:tint="@color/colorPrimary"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:onClick="onSearchClick"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_search_large"/>
+</RelativeLayout>
